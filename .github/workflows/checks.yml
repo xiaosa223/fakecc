@@ -27,5 +27,7 @@ jobs:
       - name: Windows local setup checks
         shell: powershell
         run: |
-          & ./terminal-setup/tests/Test-Core.ps1
-          & ./terminal-setup/tests/Test-TerminalHost.ps1
+          powershell.exe -NoProfile -ExecutionPolicy Bypass -File terminal-setup/tests/Test-Core.ps1
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          powershell.exe -NoProfile -ExecutionPolicy Bypass -File terminal-setup/tests/Test-TerminalHost.ps1
+          exit $LASTEXITCODE
